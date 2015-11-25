@@ -1,91 +1,187 @@
+'''
+Matrix Calculator
+Python 3.x
+
+Made by:
+Ebey Abraham
+Ayaan Das
+Christine 
+Faima
+Divya
+'''
+
 import os
-x=os.system('cls')
-print "================================================================================\n"
+ch='y'
+flag=0
 
-print "MATRIX CALCULATOR"
-print "\n================================================================================\n"
-print "1. Matrix Multiplication"
+#Function to print matrix
+def pr(c):
+        for i in range(len(c)):
+                for j in range(len(c[0])):
+                        print(c[i][j],'\t',end=' ')
+                print()
 
-print "2. Determinant"
+while ch=='y':
+        x=os.system('cls')
+        print("================================================================================\n")
 
-print "\n================================================================================\n"
+        print("MATRIX CALCULATOR")
+        print("\n================================================================================\n")
+        print("1. Matrix ")
+        print("2. Determinant")
+        print("3. Exit")
+        print("\n================================================================================\n")
 
-x=input("Enter your choice: ")
-if x>2:
-	print "Invalid Choice"
-	input()
-	x=os.system('cls')
-	exit()
+        x=int(input("Enter your choice: "))
+        if x>3:
+                print("Invalid Choice")
+                input()
+                x=os.system('cls')
+                exit()
+        k=os.system('cls')
 
+#Matrix 
+        if x==1:
+                
+                x=os.system('cls')
+                print("================================================================================\n")
+                print("MATRIX CALCULATOR")
+                print("\n================================================================================\n")
 #initialize Matrix A
-n=input("Enter size of matrix: ")
-a=[[0 for row in range(n)] for col in range(n)]
-print "Matrix A"
-for i in range(n):
-	for j in range(n):
-		a[i][j]=input()
-if x==1:
-
+                r=int(input("Enter no. of rows of matrix A: "))
+                c=int(input("Enter no. of coloumns of matrix A: "))
+                a=[[0 for row in range(r)] for col in range(c)]
+                print("Matrix A")
+                for i in range(r):
+                        for j in range(c):
+                                a[i][j]=int(input())
+                k=os.system('cls')
+                print("Matrix A:")
+                pr(a)
+                input()
+                k=os.system('cls')
 #initialize matrix B
-	b=[[0 for row in range(3)] for col in range(3)]
-	print "Matrix B"
-	for i in range(3):
-		for j in range(3):
-			b[i][j]=input()
-
-#initialize matrix C
-	c=[[0 for row in range(3)] for col in range(3)]
-
+                print("================================================================================\n")
+                print("MATRIX CALCULATOR")
+                print("\n================================================================================\n")
+                r=int(input("Enter no. of rows of matrix B: "))
+                c=int(input("Enter no. of coloumns of matrix B: "))
+                b=[[0 for row in range(c)] for col in range(r)]
+                print("Matrix B")
+                for i in range(r):
+                        for j in range(c):
+                                b[i][j]=int(input())
+                k=os.system('cls')
+                print("Matrix B:")
+                pr(b)
+                input()
+                k=os.system('cls')
+                
+                while ch=='y':
+                        x=os.system('cls')
+                        print("================================================================================\n")
+                        print("MATRIX CALCULATOR")
+                        print("\n================================================================================\n")
+                        print("1. Addition")
+                        print("2. Subtraction")
+                        print("3. Multiplication")
+                        print("4. Exit")
+                        print("\n================================================================================\n")
+                        x=int(input("Enter your choice: "))
+                
+                        if x==1:
+#calculate matA+MatB
+                                if len(a)!=len(b) or len(a[0])!=len(b[0]):
+                                        print("Cannot perform operation")
+                                        input()
+                                        continue
+                                #initialize matrix C
+                                c=[[0 for row in range(len(a))] for col in range(len(a))]
+                                for i in range(3):
+                                        for j in range(3):
+                                                c[i][j]+=a[i][j]+b[i][i]
+                        elif x==2:
+#calculate matA-MatB
+                                if len(a)!=len(b) or len(a[0])!=len(b[0]):
+                                        print("Cannot perform operation")
+                                        input()
+                                        continue
+                                #initialize matrix C
+                                c=[[0 for row in range(len(a))] for col in range(len(a))]
+                                for i in range(3):
+                                        for j in range(3):
+                                                c[i][j]+=a[i][j]-b[i][i]
+                        elif x==3:
 #calculate matA*MatB
-	for i in range(3):
-		for j in range(3):
-			for k in range(3):
-    				c[i][j]+=a[i][k]*b[k][j]
-
-	x=os.system('cls')
+                                if len(a[0])!=len(b):
+                                        print("Cannot perform operation")
+                                        input()
+                                        continue
+                                #initialize matrix C
+                                c=[[0 for row in range(len(b[0]))] for col in range(len(a))]
+                                for i in range(len(a)):
+                                        for j in range(len(b[0])):
+                                                for k in range(len(b)):
+                                                        c[i][j]+=a[i][k]*b[k][j]
+                        elif x==4:
+                                flag=10
+                                break
+                        else:
+                                print("Invalid choice")
+                                flag=1
+                        if flag!=1:
+                                x=os.system('cls')
 #print Matrix A
-	print("Matrix A:",'\n')
-	for i in range(3):
-		for j in range(3):
-			print a[i][j],'\t',
-		print
+                                print("Matrix A:",'\n')
+                                pr(a)
 
 #print matrix B
-	print "Matrix B:",'\n'
-	for i in range(3):
-		for j in range(3):
-			print b[i][j],'\t',
-		print
+                                print("\nMatrix B:",'\n')
+                                pr(b)
 
 #print result
-	print "Resultant Matrix C",'\n'
-	for i in range(3):
-		for j in range(3):
-			print c[i][j],'\t',
-		print
+                                print("\nResultant Matrix C",'\n')
+                                pr(c)
+                                input()
+                        ch=input("Continue?(y/n)")
 	
 
-elif x==2:
-	from copy import deepcopy
-	if len(a)==2:
-		det=a[0][0]*a[1][1]-a[1][0]*a[0][1]
-	else:
-		def minor(a,x):
-			min=0
-			mat=deepcopy(a)
-			del mat[0]
-			del mat[0][x]
-			del mat[1][x]
-			min=mat[0][0]*mat[1][1]-mat[1][0]*mat[0][1]
-			return min
+        elif x==2:
+#initialize Matrix A
+                r=int(input("Enter size matrix A: "))
+                a=[[0 for row in range(r)] for col in range(r)]
+                print("Matrix A")
+                for i in range(r):
+                        for j in range(r):
+                                a[i][j]=int(input())
+                from copy import deepcopy
+#Function to find minor matrix
+                def minor(matrix,i):
+                        minor = deepcopy(matrix)
+                        del minor[0]                                                            #Delete first row
+                        for b in list(range(len(minor))):                                       #Delete column i
+                                del minor[b][i]
+                        return minor
 
-		det =0
-		k=1
-		for i in range(3):
-			det+=k*a[0][i]*minor(a,i)
-			k*=-1
-	print det
-	input()		
+                def det(A):
+                        if len(A) == 1:                                                         #Base case on which recursion ends
+                                return A[0][0]
+                        else:
+                                determinant = 0
+                                for x in list(range(len(A))):                                   #Iterates along first row finding cofactors
+                                        determinant += A[0][x] * (-1)**(2+x) * det(minor(A,x)) #Adds successive elements times their cofactors
+                                return determinant
+                print('Determinant of\n ')
+                pr(a)
+                print('\nis',det(a))
+                
+        elif x==3:
+                k=os.system('cls')
+                print("THANK YOU!")
+                input()
+                k=os.system('cls')
+                exit()
 
-print "================================================================================"
-input()
+        if flag!=10:
+                ch=input("Go to main menu?(y/n)")
+        x=os.system('cls')
