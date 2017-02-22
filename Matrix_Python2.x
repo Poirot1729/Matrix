@@ -4,10 +4,6 @@ Python 3.x
 
 Made by:
 Ebey Abraham
-Ayaan Das
-Christine 
-Faima
-Divya
 '''
 
 import os
